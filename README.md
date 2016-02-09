@@ -21,9 +21,66 @@ Or install it yourself as:
 
     $ gem install parse_name_from_email
 
+## Configuration
+
+You don't need to configure anymore, but if you want to configure yourself, you can change this values:
+
+```ruby
+ParseNameFromEmail.configure do |config|
+  # split email address with regexp
+  config.regexp = /(?=[A-Z])|(?:([0-9]+))|\.|-|\?|!|\+|\;|\_/
+
+  ## Recognizing plus parts in gmail addresses
+  #
+  # DEFAULT: true
+  #
+  # if TRUE:
+  #   email address:  'example+something123@gmail.com'
+  #   result name:    'Example (Something 123)'
+  #
+  # if FALSE:
+  #   email address:  'example+something123@gmail.com'
+  #   result name:    'Example Something 123'
+  config.friendly_plus_part = true
+end
+```
+
+Values above are default.
+
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+ParseNameFromEmail.get_email_name('john-snow@example.com') # => 'john-snow'
+ParseNameFromEmail.get_email_name('john-snow+nickname@example.com') # => 'john-snow+nickname'
+
+ParseNameFromEmail.valid_rfc_format?('john-snow@example.com') # => false
+ParseNameFromEmail.valid_rfc_format?('John Snow <john.snow@example.com>') # => true
+
+
+ParseNameFromEmail.parse_name_from('JohnSnow@example.com') # => 'John Snow'
+ParseNameFromEmail.parse_name_from('john-snow@example.com') # => 'John Snow'
+ParseNameFromEmail.parse_name_from('john_snow@example.com') # => 'John Snow'
+ParseNameFromEmail.parse_name_from('john123snow@example.com') # => 'John 123 Snow'
+ParseNameFromEmail.parse_name_from('John Snow <john.snow@example.com>') # => 'John Snow'
+
+# if config.friendly_plus_part = true
+ParseNameFromEmail.parse_name_from('JohnSnow+Nickname123@example.com') # => 'John Snow (Nickname 123)'
+
+# if config.friendly_plus_part = false
+ParseNameFromEmail.parse_name_from('JohnSnow+Nickname123@example.com') # => 'John Snow Nickname 123'
+
+# batches
+string_with_emails = 'John Snow <john.snow@example.com>, Lily Black <lilyblack@example.com>, alice.123@3x4mpl3.app'
+ParseNameFromEmail.parse_names_from(string_with_emails) # => ['John Snow', 'Lily Black', 'Alice 123']
+
+string_with_emails = 'john.snow@example.com, lily+black@example.com, alice.123@3x4mpl3.app'
+ParseNameFromEmail.parse_names_from(string_with_emails) # => ['John Snow', 'Lily (black)', 'Alice 123']
+
+# advanced parsing
+string_with_emails = 'john.snow@example.com, lily+black@example.com, alice.123@3x4mpl3.app'
+ParseNameFromEmail.parse_emails_with_names_from(string_with_emails) # => {'john.snow@example.com' => 'John Snow', 'lily+black@example.com' => 'Lily (black)', 'alice.123@3x4mpl3.app' => 'Alice 123'}
+
+```
 
 ## Development
 
@@ -33,7 +90,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/parse_name_from_email.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Applifting/parse_name_from_email.
 
 
 ## License
