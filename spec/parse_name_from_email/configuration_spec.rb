@@ -10,5 +10,4 @@ describe ParseNameFromEmail::Configuration do
   it 'sets default value for friendly plus part to true' do
     expect(configuration.friendly_plus_part).to be true
   end
-
 end

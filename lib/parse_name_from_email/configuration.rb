@@ -27,6 +27,5 @@ module ParseNameFromEmail
     def self.regex_for_validation_format_as_rfc
       /(\<[\S]*[\S]*\.[\S]*\>)/
     end
-
   end
 end

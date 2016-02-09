@@ -6,7 +6,6 @@ require 'parse_name_from_email/batch'
 
 module ParseNameFromEmail
   class << self
-
     def configuration
       @configuration ||= Configuration.new
     end
@@ -22,14 +21,14 @@ module ParseNameFromEmail
     def parse_emails_with_names_from(string_with_emails)
       emails = Batch.split_emails_to_array(string_with_emails)
       result = {}
-      emails.each{ |email| result[get_email_address(email)] = parse_name_from(email) }
+      emails.each { |email| result[get_email_address(email)] = parse_name_from(email) }
       result
     end
 
     def parse_names_from(string_with_emails)
       emails = Batch.split_emails_to_array(string_with_emails)
       result = []
-      emails.each{ |email| result << parse_name_from(email) }
+      emails.each { |email| result << parse_name_from(email) }
       result
     end
 
@@ -57,7 +56,7 @@ module ParseNameFromEmail
 
       # add part after plus
       if configuration.friendly_plus_part && !plus_part.blank?
-        name += " " unless name.blank?
+        name += ' ' unless name.blank?
         name += "(#{plus_part})" unless plus_part.blank?
       end
 
@@ -72,16 +71,14 @@ module ParseNameFromEmail
     # is rfc format? if true, return me only the email address
     def get_email_address(email)
       if valid_rfc_format?(email)
-        email = email.split(/\</).last.to_s.gsub(/\>/, '')
+        email = email.split(/\</).last.to_s.delete('>')
       end
       email.strip
     end
 
     # if is rfc format of email, returns only name
     def get_name_if_rfc_format_of_email(email)
-      if valid_rfc_format?(email)
-        name = email.split(/\</).first.to_s.strip
-      end
+      name = email.split(/\</).first.to_s.strip if valid_rfc_format?(email)
       name
     end
 
@@ -97,7 +94,7 @@ module ParseNameFromEmail
 
     # after regex join it with blank space and upcase first letters
     def make_human_readable(array)
-      humanized_elements = array.map{ |el| el.strip.humanize}
+      humanized_elements = array.map { |el| el.strip.humanize }
       humanized_elements.reject(&:empty?).join(' ')
     end
 
@@ -106,6 +103,5 @@ module ParseNameFromEmail
       match = (email =~ Configuration.regex_for_validation_format_as_rfc)
       match.present?
     end
-
   end
 end
