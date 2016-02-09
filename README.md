@@ -50,18 +50,20 @@ Values above are default.
 ## Usage
 
 ```ruby
+# getting email address
 ParseNameFromEmail.get_email_name('john-snow@example.com') # => 'john-snow'
 ParseNameFromEmail.get_email_name('john-snow+nickname@example.com') # => 'john-snow+nickname'
 
-ParseNameFromEmail.valid_rfc_format?('john-snow@example.com') # => false
-ParseNameFromEmail.valid_rfc_format?('John Snow <john.snow@example.com>') # => true
-
-
+# parsing name from email address
 ParseNameFromEmail.parse_name_from('JohnSnow@example.com') # => 'John Snow'
 ParseNameFromEmail.parse_name_from('john-snow@example.com') # => 'John Snow'
 ParseNameFromEmail.parse_name_from('john_snow@example.com') # => 'John Snow'
 ParseNameFromEmail.parse_name_from('john123snow@example.com') # => 'John 123 Snow'
 ParseNameFromEmail.parse_name_from('John Snow <john.snow@example.com>') # => 'John Snow'
+
+# validating RFC format of email
+ParseNameFromEmail.valid_rfc_format?('john-snow@example.com') # => false
+ParseNameFromEmail.valid_rfc_format?('John Snow <john.snow@example.com>') # => true
 
 # if config.friendly_plus_part = true
 ParseNameFromEmail.parse_name_from('JohnSnow+Nickname123@example.com') # => 'John Snow (Nickname 123)'
@@ -70,15 +72,16 @@ ParseNameFromEmail.parse_name_from('JohnSnow+Nickname123@example.com') # => 'Joh
 ParseNameFromEmail.parse_name_from('JohnSnow+Nickname123@example.com') # => 'John Snow Nickname 123'
 
 # batches
-string_with_emails = 'John Snow <john.snow@example.com>, Lily Black <lilyblack@example.com>, alice.123@3x4mpl3.app'
-ParseNameFromEmail.parse_names_from(string_with_emails) # => ['John Snow', 'Lily Black', 'Alice 123']
+string_with_emails = 'John Snow <john.snow@example.com>, alice.123@3x4mpl3.app'
+ParseNameFromEmail.parse_names_from(string_with_emails) # => ['John Snow', 'Alice 123']
 
-string_with_emails = 'john.snow@example.com, lily+black@example.com, alice.123@3x4mpl3.app'
-ParseNameFromEmail.parse_names_from(string_with_emails) # => ['John Snow', 'Lily (black)', 'Alice 123']
+string_with_emails = 'lily+black@example.com, alice.123@3x4mpl3.app'
+ParseNameFromEmail.parse_names_from(string_with_emails) # => ['Lily (black)', 'Alice 123']
 
 # advanced parsing
-string_with_emails = 'john.snow@example.com, lily+black@example.com, alice.123@3x4mpl3.app'
-ParseNameFromEmail.parse_emails_with_names_from(string_with_emails) # => {'john.snow@example.com' => 'John Snow', 'lily+black@example.com' => 'Lily (black)', 'alice.123@3x4mpl3.app' => 'Alice 123'}
+string_with_emails = 'john.snow@example.com, lily+black@example.com'
+ParseNameFromEmail.parse_emails_with_names_from(string_with_emails)
+# => {'john.snow@example.com' => 'John Snow', 'lily+black@example.com' => 'Lily (black)'}
 
 ```
 
