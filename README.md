@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/Applifting/parse_name_from_email.svg?branch=master)](https://travis-ci.org/Applifting/parse_name_from_email)
 [![Coverage Status](https://coveralls.io/repos/github/Applifting/parse_name_from_email/badge.svg?branch=master)](https://coveralls.io/github/Applifting/parse_name_from_email?branch=master)
 
-This gem for easy way to parse email address or name from string of them.
+Rails gem to easy parse user name from email address.
 
 ## Installation
 
