@@ -2,6 +2,7 @@ require 'active_support/all'
 
 require 'parse_name_from_email/version'
 require 'parse_name_from_email/configuration'
+require 'parse_name_from_email/batch'
 
 module ParseNameFromEmail
   class << self
@@ -18,7 +19,24 @@ module ParseNameFromEmail
       yield(configuration)
     end
 
+    def parse_emails_with_names_from(string_with_emails)
+      emails = Batch.split_emails_to_array(string_with_emails)
+      result = {}
+      emails.each{ |email| result[get_email_address(email)] = parse_name_from(email) }
+      result
+    end
+
+    def parse_names_from(string_with_emails)
+      emails = Batch.split_emails_to_array(string_with_emails)
+      result = []
+      emails.each{ |email| result << parse_name_from(email) }
+      result
+    end
+
     def parse_name_from(email)
+      name_from_rfc = get_name_if_rfc_format_of_email(email)
+      return name_from_rfc unless name_from_rfc.blank?
+
       email_name = get_email_name(email)
 
       # if friendly plus part, make result more readable
@@ -51,6 +69,22 @@ module ParseNameFromEmail
       email.split('@').first
     end
 
+    # is rfc format? if true, return me only the email address
+    def get_email_address(email)
+      if valid_rfc_format?(email)
+        email = email.split(/\</).last.to_s.gsub(/\>/, '')
+      end
+      email.strip
+    end
+
+    # if is rfc format of email, returns only name
+    def get_name_if_rfc_format_of_email(email)
+      if valid_rfc_format?(email)
+        name = email.split(/\</).first.to_s.strip
+      end
+      name
+    end
+
     # split email plus part
     def split_plus_part(email)
       email.split('+')
@@ -58,13 +92,19 @@ module ParseNameFromEmail
 
     # split email by regex
     def split_to_words(email_name)
-      email_name.split(configuration.regex)
+      email_name.split(configuration.regexp)
     end
 
     # after regex join it with blank space and upcase first letters
     def make_human_readable(array)
-      humanized_elements = array.map(&:humanize)
-      humanized_elements.join(' ')
+      humanized_elements = array.map{ |el| el.strip.humanize}
+      humanized_elements.reject(&:empty?).join(' ')
+    end
+
+    # match regexp if is valid rfc format
+    def valid_rfc_format?(email)
+      match = (email =~ Configuration.regex_for_validation_format_as_rfc)
+      match.present?
     end
 
   end
