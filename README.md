@@ -1,8 +1,9 @@
 # ParseNameFromEmail
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/parse_name_from_email`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![Build Status](https://travis-ci.org/Applifting/parse_name_from_email.svg?branch=master)](https://travis-ci.org/Applifting/parse_name_from_email)
+[![Coverage Status](https://coveralls.io/repos/github/Applifting/parse_name_from_email/badge.svg?branch=master)](https://coveralls.io/github/Applifting/parse_name_from_email?branch=master)
 
-TODO: Delete this and the text above, and describe your gem
+This gem for easy way to parse email address or name from string of them.
 
 ## Installation
 
