@@ -18,6 +18,7 @@ module ParseNameFromEmail
       yield(configuration)
     end
 
+    # parses string of multiple emails to hash of emails and generated names
     def parse_emails_with_names_from(string_with_emails)
       emails = Batch.split_emails_to_array(string_with_emails)
       result = {}
@@ -25,6 +26,7 @@ module ParseNameFromEmail
       result
     end
 
+    # parses string of multiple emails to array of names
     def parse_names_from(string_with_emails)
       emails = Batch.split_emails_to_array(string_with_emails)
       result = []
@@ -32,10 +34,13 @@ module ParseNameFromEmail
       result
     end
 
+    # main logic of parsing one email address
     def parse_name_from(email)
+      # if emails is in RFC format, return the name if not blank
       name_from_rfc = get_name_if_rfc_format_of_email(email)
       return name_from_rfc unless name_from_rfc.blank?
 
+      # get part before '@'
       email_name = get_email_name(email)
 
       # if friendly plus part, make result more readable
