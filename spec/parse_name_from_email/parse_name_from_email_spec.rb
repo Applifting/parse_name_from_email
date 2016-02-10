@@ -162,6 +162,13 @@ describe ParseNameFromEmail do
 
       expect(parse_name_from_email.parse_emails_with_names_from(string_with_emails)).to eq expected_hash
     end
+    
+    it 'should valid parse names from rfc emails - separated by ;' do
+      string_with_emails = 'John Snow <john.snow@example.com>; Lily Black <lilyblack@example.com>; Alice White <alice.123@3x4mpl3.app>'
+      expected_hash = { 'john.snow@example.com' => 'John Snow', 'lilyblack@example.com' => 'Lily Black', 'alice.123@3x4mpl3.app' => 'Alice White' }
+
+      expect(parse_name_from_email.parse_emails_with_names_from(string_with_emails)).to eq expected_hash
+    end    
 
     it 'should valid parse names from rfc emails, but some email is without name' do
       string_with_emails = 'John Snow <john.snow@example.com>, Lily Black <lilyblack@example.com>, alice.123@3x4mpl3.app'
