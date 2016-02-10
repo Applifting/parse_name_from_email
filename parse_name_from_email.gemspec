@@ -6,7 +6,7 @@ require 'parse_name_from_email/version'
 Gem::Specification.new do |spec|
   spec.name          = 'parse_name_from_email'
   spec.version       = ParseNameFromEmail::VERSION
-  spec.authors       = ['Prokop Simek']
+  spec.authors       = ['Prokop Simek, Applifting']
   spec.email         = ['prokop.simek@applifting.cz']
 
   spec.summary       = 'Parsing name from email address.'
