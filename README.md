@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/Applifting/parse_name_from_email.svg?branch=master)](https://travis-ci.org/Applifting/parse_name_from_email)
 [![Coverage Status](https://coveralls.io/repos/github/Applifting/parse_name_from_email/badge.svg?branch=master)](https://coveralls.io/github/Applifting/parse_name_from_email?branch=master)
 
-Rails gem to easy parse user name from email address.
+Rails gem to easily parse user name from email address.
 
 ## Installation
 
@@ -24,7 +24,7 @@ Or install it yourself as:
 
 ## Configuration
 
-You don't need to configure anymore, but if you want to configure yourself, you can change this values:
+You don't need to configure anything, but if you want to customize the behaviour, use the following snippet:
 
 ```ruby
 ParseNameFromEmail.configure do |config|
@@ -46,7 +46,7 @@ ParseNameFromEmail.configure do |config|
 end
 ```
 
-Values above are default.
+Values in the above snippet are the default values.
 
 ## Usage
 
