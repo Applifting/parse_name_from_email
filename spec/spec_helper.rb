@@ -7,4 +7,4 @@ RSpec.configure do |c|
 end
 
 require 'coveralls'
-Coveralls.wear!
+Coveralls.wear!('rails')
