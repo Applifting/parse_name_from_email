@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Prokop Simek, Applifting']
   spec.email         = ['prokop.simek@applifting.cz']
 
-  spec.summary       = 'Parsing name from email address.'
-  spec.description   = 'This gem for easy way to parse name from email address.'
+  spec.summary       = 'Parse name from email address.'
+  spec.description   = 'This gem makes it easy to parse name from email addresses.'
   spec.homepage      = 'https://github.com/Applifting/parse_name_from_email'
   spec.license       = 'MIT'
 
