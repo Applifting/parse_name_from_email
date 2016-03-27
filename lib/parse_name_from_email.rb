@@ -100,7 +100,7 @@ module ParseNameFromEmail
     # after regex join it with blank space and upcase first letters
     def make_human_readable(array)
       humanized_elements = array.map { |el| el.strip.humanize }
-      humanized_elements.reject(&:empty?).join(' ')
+      humanized_elements.reject(&:empty?).reject{ |str| str =~ /\d/ }.join(' ')
     end
 
     # match regexp if is valid rfc format
