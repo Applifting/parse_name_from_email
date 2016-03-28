@@ -3,7 +3,7 @@ module ParseNameFromEmail
     attr_accessor :regexp, :friendly_plus_part
 
     def initialize
-      # split email address with regexp
+      # split email address with regexp (test: https://regex101.com/r/pF5mS4)
       @regexp = /(?=[A-Z])|(?:([0-9]+))|\.|-|\?|!|\+|\;|\_/
 
       ## Recognizing plus parts in gmail addresses

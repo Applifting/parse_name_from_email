@@ -103,7 +103,7 @@ describe ParseNameFromEmail do
 
     it 'should parse by set of numbers' do
       email = 'some123email@example.com'
-      expect(parse_name_from_email.parse_name_from(email)).to eq 'Some 123 Email'
+      expect(parse_name_from_email.parse_name_from(email)).to eq 'Some Email'
     end
 
     it 'should parse by big chars' do
@@ -114,6 +114,11 @@ describe ParseNameFromEmail do
     it 'should friendly parse by \+' do
       email = 'some+email@example.com'
       expect(parse_name_from_email.parse_name_from(email)).to eq 'Some (email)'
+    end
+
+    it 'should friendly parse by \+ with numbers' do
+      email = 'some123+email123@example.com'
+      expect(parse_name_from_email.parse_name_from(email)).to eq 'Some (email123)'
     end
 
     it 'should not friendly parse by \+ if not configured' do
@@ -141,17 +146,17 @@ describe ParseNameFromEmail do
 
     it 'should valid parse names from rfc emails, but some email is without name' do
       string_with_emails = 'John Snow <john.snow@example.com>, Lily Black <lilyblack@example.com>, alice.123@3x4mpl3.app'
-      expect(parse_name_from_email.parse_names_from(string_with_emails)).to eq ['John Snow', 'Lily Black', 'Alice 123']
+      expect(parse_name_from_email.parse_names_from(string_with_emails)).to eq ['John Snow', 'Lily Black', 'Alice']
     end
 
     it 'should valid parse names in non rfc format of emails' do
       string_with_emails = 'john.snow@example.com, LilyBlack@example.com, alice.123@3x4mpl3.app'
-      expect(parse_name_from_email.parse_names_from(string_with_emails)).to eq ['John Snow', 'Lily Black', 'Alice 123']
+      expect(parse_name_from_email.parse_names_from(string_with_emails)).to eq ['John Snow', 'Lily Black', 'Alice']
     end
 
     it 'should valid parse names in non rfc format of emails and any email is with \+' do
       string_with_emails = 'john.snow@example.com, lily+black@example.com, alice.123@3x4mpl3.app'
-      expect(parse_name_from_email.parse_names_from(string_with_emails)).to eq ['John Snow', 'Lily (black)', 'Alice 123']
+      expect(parse_name_from_email.parse_names_from(string_with_emails)).to eq ['John Snow', 'Lily (black)', 'Alice']
     end
   end
 
@@ -172,21 +177,21 @@ describe ParseNameFromEmail do
 
     it 'should valid parse names from rfc emails, but some email is without name' do
       string_with_emails = 'John Snow <john.snow@example.com>, Lily Black <lilyblack@example.com>, alice.123@3x4mpl3.app'
-      expected_hash = { 'john.snow@example.com' => 'John Snow', 'lilyblack@example.com' => 'Lily Black', 'alice.123@3x4mpl3.app' => 'Alice 123' }
+      expected_hash = { 'john.snow@example.com' => 'John Snow', 'lilyblack@example.com' => 'Lily Black', 'alice.123@3x4mpl3.app' => 'Alice' }
 
       expect(parse_name_from_email.parse_emails_with_names_from(string_with_emails)).to eq expected_hash
     end
 
     it 'should valid parse names in non rfc format of emails' do
       string_with_emails = 'john.snow@example.com, LilyBlack@example.com, alice.123@3x4mpl3.app'
-      expected_hash = { 'john.snow@example.com' => 'John Snow', 'LilyBlack@example.com' => 'Lily Black', 'alice.123@3x4mpl3.app' => 'Alice 123' }
+      expected_hash = { 'john.snow@example.com' => 'John Snow', 'LilyBlack@example.com' => 'Lily Black', 'alice.123@3x4mpl3.app' => 'Alice' }
 
       expect(parse_name_from_email.parse_emails_with_names_from(string_with_emails)).to eq expected_hash
     end
 
     it 'should valid parse names in non rfc format of emails and any email is with \+' do
       string_with_emails = 'john.snow@example.com, lily+black@example.com, alice.123@3x4mpl3.app'
-      expected_hash = { 'john.snow@example.com' => 'John Snow', 'lily+black@example.com' => 'Lily (black)', 'alice.123@3x4mpl3.app' => 'Alice 123' }
+      expected_hash = { 'john.snow@example.com' => 'John Snow', 'lily+black@example.com' => 'Lily (black)', 'alice.123@3x4mpl3.app' => 'Alice' }
 
       expect(parse_name_from_email.parse_emails_with_names_from(string_with_emails)).to eq expected_hash
     end

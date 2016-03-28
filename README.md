@@ -59,7 +59,7 @@ ParseNameFromEmail.get_email_name('john-snow+nickname@example.com') # => 'john-s
 ParseNameFromEmail.parse_name_from('JohnSnow@example.com') # => 'John Snow'
 ParseNameFromEmail.parse_name_from('john-snow@example.com') # => 'John Snow'
 ParseNameFromEmail.parse_name_from('john_snow@example.com') # => 'John Snow'
-ParseNameFromEmail.parse_name_from('john123snow@example.com') # => 'John 123 Snow'
+ParseNameFromEmail.parse_name_from('john123snow@example.com') # => 'John Snow'
 ParseNameFromEmail.parse_name_from('John Snow <john.snow@example.com>') # => 'John Snow'
 
 # validating RFC format of email
@@ -74,10 +74,10 @@ ParseNameFromEmail.parse_name_from('JohnSnow+Nickname123@example.com') # => 'Joh
 
 # batches
 string_with_emails = 'John Snow <john.snow@example.com>, alice.123@3x4mpl3.app'
-ParseNameFromEmail.parse_names_from(string_with_emails) # => ['John Snow', 'Alice 123']
+ParseNameFromEmail.parse_names_from(string_with_emails) # => ['John Snow', 'Alice']
 
 string_with_emails = 'lily+black@example.com, alice.123@3x4mpl3.app'
-ParseNameFromEmail.parse_names_from(string_with_emails) # => ['Lily (black)', 'Alice 123']
+ParseNameFromEmail.parse_names_from(string_with_emails) # => ['Lily (black)', 'Alice']
 
 # advanced parsing
 string_with_emails = 'john.snow@example.com, lily+black@example.com'
