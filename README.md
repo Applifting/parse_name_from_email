@@ -41,7 +41,7 @@ ParseNameFromEmail.configure do |config|
   #
   # if FALSE:
   #   email address:  'example+something123@gmail.com'
-  #   result name:    'Example Something 123'
+  #   result name:    'Example'
   config.friendly_plus_part = true
 end
 ```
@@ -70,7 +70,7 @@ ParseNameFromEmail.valid_rfc_format?('John Snow <john.snow@example.com>') # => t
 ParseNameFromEmail.parse_name_from('JohnSnow+Nickname123@example.com') # => 'John Snow (Nickname 123)'
 
 # if config.friendly_plus_part = false
-ParseNameFromEmail.parse_name_from('JohnSnow+Nickname123@example.com') # => 'John Snow Nickname 123'
+ParseNameFromEmail.parse_name_from('JohnSnow+Nickname123@example.com') # => 'John Snow'
 
 # batches
 string_with_emails = 'John Snow <john.snow@example.com>, alice.123@3x4mpl3.app'

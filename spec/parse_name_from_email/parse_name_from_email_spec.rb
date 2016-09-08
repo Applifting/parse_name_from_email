@@ -127,6 +127,17 @@ describe ParseNameFromEmail do
       end
 
       email = 'some+email@example.com'
+      expect(parse_name_from_email.parse_name_from(email)).to eq 'Some'
+
+      parse_name_from_email.reset # reset back to defaults
+    end
+
+    it 'should not friendly parse email with more than one word by \+ if not configured' do
+      parse_name_from_email.configure do |config|
+        config.friendly_plus_part = false
+      end
+
+      email = 'some-email+friendly-plus-part@example.com'
       expect(parse_name_from_email.parse_name_from(email)).to eq 'Some Email'
 
       parse_name_from_email.reset # reset back to defaults
