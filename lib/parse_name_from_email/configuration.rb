@@ -16,7 +16,7 @@ module ParseNameFromEmail
       #
       # if FALSE:
       #   email address:  'example+something123@gmail.com'
-      #   result name:    'Example Something 123'
+      #   result name:    'Example'
       @friendly_plus_part = true
     end
 

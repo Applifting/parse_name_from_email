@@ -43,15 +43,13 @@ module ParseNameFromEmail
       # get part before '@'
       email_name = get_email_name(email)
 
-      # if friendly plus part, make result more readable
-      if configuration.friendly_plus_part
-        splitted_by_plus = split_plus_part(email_name) # get part before and after plus part
+      splitted_by_plus = split_plus_part(email_name) # get part before and after plus part
 
-        if splitted_by_plus.size >= 2
-          email_name = splitted_by_plus[0...-1].join(' ') # reject part after plus and overwrite it joined to string
+      # if friendly plus part, make result more readable
+      if splitted_by_plus.size >= 2
+        email_name = splitted_by_plus[0...-1].join(' ') # reject part after plus and overwrite it joined to string
+        if configuration.friendly_plus_part
           plus_part = splitted_by_plus.last # last part is after plus and it should be gmail nickname
-        else
-          email_name = splitted_by_plus.join(' ')
         end
       end
 
