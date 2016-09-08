@@ -1,5 +1,5 @@
 require 'coveralls'
-Coveralls.wear!('rails')
+Coveralls.wear!
 
 require 'rspec'
 require 'parse_name_from_email'
