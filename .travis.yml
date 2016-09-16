@@ -1,8 +1,18 @@
 sudo: false
 language: ruby
 rvm:
-  - 2.0
-  - 2.1
-  - 2.2
-  - 2.2.3
   - 2.3.1
+
+before_install:
+  - gem update bundler
+
+matrix:
+  include:
+    - rvm: 2.0
+      gemfile: gemfiles/ruby-2.0
+    - rvm: 2.1
+      gemfile: gemfiles/ruby-2.1
+    - rvm: 2.2
+      gemfile: gemfiles/ruby-2.2
+    - rvm: 2.2.3
+      gemfile: gemfiles/ruby-2.2
