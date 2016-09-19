@@ -1,6 +1,3 @@
-require 'coveralls'
-Coveralls.wear!
-
 require 'rspec'
 require 'parse_name_from_email'
 
