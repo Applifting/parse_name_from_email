@@ -6,4 +6,3 @@ gemspec
 gem 'activesupport'
 
 gem 'rspec'
-gem 'coveralls', require: false

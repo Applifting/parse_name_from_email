@@ -2,7 +2,6 @@
 
 [![Gem Version](https://badge.fury.io/rb/parse_name_from_email.svg)](https://badge.fury.io/rb/parse_name_from_email)
 [![Build Status](https://travis-ci.org/Applifting/parse_name_from_email.svg?branch=master)](https://travis-ci.org/Applifting/parse_name_from_email)
-[![Coverage Status](https://coveralls.io/repos/github/Applifting/parse_name_from_email/badge.svg?branch=master)](https://coveralls.io/github/Applifting/parse_name_from_email?branch=master)
 
 Rails gem to easily parse user name from email address.
 
